@@ -1,0 +1,20 @@
+CC = gcc              # 指定编译器
+CFLAGS = -Wall -g     # 编译选项，-Wall 显示所有警告，-g 生成调试信息
+
+OBJ = main.o snake.o  # 目标文件
+
+# 默认目标（执行 make 时编译 snake 可执行文件）
+snake: $(OBJ)
+	$(CC) $(CFLAGS) -o snake $(OBJ)
+
+# 编译 main.c 生成 main.o
+main.o: main.c snake.h
+	$(CC) $(CFLAGS) -c main.c
+
+# 编译 snake.c 生成 snake.o
+snake.o: snake.c snake.h
+	$(CC) $(CFLAGS) -c snake.c
+
+# 清理编译生成的文件
+clean:
+	rm -f *.o snake
